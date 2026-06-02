@@ -54,13 +54,42 @@ Try it by running `git push` in any terminal — VS Code will pop a modal dialog
 
 ## Configuration
 
-Open VS Code settings (`Cmd+,` / `Ctrl+,`) and search for **Push Reminder**, or add the following to your `settings.json`:
+Open VS Code settings (`Cmd+,` / `Ctrl+,`) and search for **Push Reminder**, or add entries to your `settings.json`.
+
+### Custom dialog message
 
 ```json
 "pushReminder.message": "Have you completed all required checks before pushing?"
 ```
 
 Change the value to any question or reminder you want displayed before each push.
+
+### Obsidian checklist reset (optional)
+
+If you maintain a pre-push checklist in an Obsidian note, the extension can automatically reset it after every successful push — so the next push starts with a clean slate.
+
+**How it works:**
+
+1. Keep a checklist in any Obsidian markdown file using standard checkbox syntax:
+   ```markdown
+   - [ ] All tests passing
+   - [ ] PR description written
+   - [ ] No debug logs left in
+   ```
+2. During your work session, check items off in Obsidian as you complete them (`- [x]`)
+3. When you push and confirm the dialog, the extension rewrites all `- [x]` items back to `- [ ]` in the file — ready for the next push
+
+**Enable it in `settings.json`:**
+
+```json
+"pushReminder.obsidianChecklist.enabled": true,
+"pushReminder.obsidianChecklist.filePath": "/absolute/path/to/your/checklist.md"
+```
+
+- `obsidianChecklist.enabled` — set to `true` to turn this on (default: `false`)
+- `obsidianChecklist.filePath` — absolute path to the `.md` file containing your checklist
+
+If the file can't be read or contains no checklist items, the extension falls back to the normal dialog and shows a warning notification.
 
 ## Uninstalling
 
