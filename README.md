@@ -2,7 +2,7 @@
 
 A VS Code extension that intercepts every `git push` and shows a modal confirmation dialog before it goes through. The push is blocked until you answer — useful as a last-chance checklist before code leaves your machine.
 
-## How it works
+## How it works 
 
 When the extension activates, it:
 
