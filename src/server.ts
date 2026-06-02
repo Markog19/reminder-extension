@@ -53,11 +53,15 @@ export class PushReminderServer {
 }
 
 function resetChecklist(filePath: string): void {
+  const trimmedPath = filePath.trim();
   try {
-    const content = fs.readFileSync(filePath, 'utf8');
+    const content = fs.readFileSync(trimmedPath, 'utf8');
     const reset = content.replace(/^([-*]\s+)\[x\]/gim, '$1[ ]');
     if (reset !== content) {
-      fs.writeFileSync(filePath, reset, 'utf8');
+      fs.writeFileSync(trimmedPath, reset, 'utf8');
+      vscode.window.showInformationMessage('Push Reminder: checklist reset successfully.');
+    } else {
+      vscode.window.showInformationMessage('Push Reminder: checklist was already clear, nothing to reset.');
     }
   } catch (err) {
     vscode.window.showWarningMessage(
