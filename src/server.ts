@@ -57,11 +57,11 @@ function resetChecklist(filePath: string): void {
   try {
     const content = fs.readFileSync(trimmedPath, 'utf8');
     const reset = content.replace(/^([-*]\s+)\[x\]/gim, '$1[ ]');
-    if (reset !== content) {
+    if (reset === content) {
+      vscode.window.showInformationMessage('Push Reminder: checklist was already clear, nothing to reset.');
+    } else {
       fs.writeFileSync(trimmedPath, reset, 'utf8');
       vscode.window.showInformationMessage('Push Reminder: checklist reset successfully.');
-    } else {
-      vscode.window.showInformationMessage('Push Reminder: checklist was already clear, nothing to reset.');
     }
   } catch (err) {
     vscode.window.showWarningMessage(
