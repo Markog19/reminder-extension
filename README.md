@@ -26,7 +26,7 @@ The hook is non-destructive — if a `pre-push` hook already exists, the extensi
 1. Download or locate `push-reminder-0.0.1.vsix` from this repository
 2. Open VS Code
 3. Open the Command Palette (`Cmd+Shift+P` / `Ctrl+Shift+P`) and run **Extensions: Install from VSIX...**
-4. Select the `.vsix` file and confirm
+4. Select the `.vsix` file and confir
 5. Reload VS Code after installation — or run **Developer: Reload Window** from the Command Palette
 
 ### Build from source
