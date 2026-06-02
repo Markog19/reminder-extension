@@ -7,8 +7,12 @@
   "engines": {
     "vscode": "^1.80.0"
   },
-  "categories": ["Other"],
-  "activationEvents": ["workspaceContains:.git"],
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "workspaceContains:.git"
+  ],
   "main": "./out/extension.js",
   "contributes": {
     "configuration": {
@@ -18,6 +22,16 @@
           "type": "string",
           "default": "Have you completed all required checks before pushing?",
           "description": "Question shown in the modal dialog before each git push."
+        },
+        "pushReminder.obsidianChecklist.enabled": {
+          "type": "boolean",
+          "default": false,
+          "description": "When enabled, reads a checklist from an Obsidian markdown file and shows it before each push. All items must be checked before pushing is allowed."
+        },
+        "pushReminder.obsidianChecklist.filePath": {
+          "type": "string",
+          "default": "",
+          "description": "Absolute path to the Obsidian markdown file containing the pre-push checklist. Lines formatted as `- [ ] item` are extracted as checklist items."
         }
       }
     }
@@ -28,7 +42,7 @@
     "package": "vsce package"
   },
   "devDependencies": {
-    "@types/node": "^18.0.0",
+    "@types/node": "^18.19.130",
     "@types/vscode": "^1.80.0",
     "typescript": "^5.0.0"
   }

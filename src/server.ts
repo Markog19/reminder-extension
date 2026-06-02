@@ -1,13 +1,13 @@
 import * as http from 'http';
 import * as net from 'net';
+import * as fs from 'fs';
 import * as vscode from 'vscode';
 
 export class PushReminderServer {
   private server: http.Server | undefined;
-  private port: number | undefined;
 
   async start(): Promise<number> {
-    this.port = await findAvailablePort(34567);
+    const port = await findAvailablePort(34567);
 
     this.server = http.createServer((req, res) => {
       if (req.method !== 'POST' || req.url !== '/pre-push') {
@@ -22,10 +22,15 @@ export class PushReminderServer {
         'Have you completed all required checks before pushing?'
       );
 
-      vscode.window
+      void vscode.window
         .showWarningMessage(message, { modal: true }, 'Yes, push', 'No, cancel')
         .then((answer) => {
           if (answer === 'Yes, push') {
+            const checklistEnabled = config.get<boolean>('obsidianChecklist.enabled', false);
+            const checklistPath = config.get<string>('obsidianChecklist.filePath', '');
+            if (checklistEnabled && checklistPath) {
+              resetChecklist(checklistPath);
+            }
             res.writeHead(200);
             res.end('proceed');
           } else {
@@ -36,14 +41,28 @@ export class PushReminderServer {
     });
 
     await new Promise<void>((resolve) => {
-      this.server!.listen(this.port, '127.0.0.1', resolve);
+      this.server!.listen(port, '127.0.0.1', resolve);
     });
 
-    return this.port;
+    return port;
   }
 
   stop(): void {
     this.server?.close();
+  }
+}
+
+function resetChecklist(filePath: string): void {
+  try {
+    const content = fs.readFileSync(filePath, 'utf8');
+    const reset = content.replace(/^([-*]\s+)\[x\]/gim, '$1[ ]');
+    if (reset !== content) {
+      fs.writeFileSync(filePath, reset, 'utf8');
+    }
+  } catch (err) {
+    vscode.window.showWarningMessage(
+      `Push Reminder: could not reset checklist — ${String(err)}`
+    );
   }
 }
 
