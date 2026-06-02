@@ -28,7 +28,7 @@ The hook is non-destructive — if a `pre-push` hook already exists, the extensi
 3. Open the Command Palette (`Cmd+Shift+P` / `Ctrl+Shift+P`) and run **Extensions: Install from VSIX...**
 4. Select the `.vsix` file and confirm
 
-### Build from source
+### Build from source-
 
 ```bash
 git clone <repo-url>
