@@ -91,6 +91,14 @@ If you maintain a pre-push checklist in an Obsidian note, the extension can auto
 
 If the file can't be read or contains no checklist items, the extension falls back to the normal dialog and shows a warning notification.
 
+**How to find the absolute path in Obsidian:**
+
+- Right-click the file in Obsidian's sidebar → **Copy file path** — this copies the full system path directly
+- Or right-click → **Show in Finder** (Mac) / **Show in Explorer** (Windows), then drag the file into a terminal to reveal its path
+- If you need the vault root: **Settings → About** shows the vault path; your file's path is `<vault root>/<relative path to file>`
+
+Make sure the path has no leading or trailing spaces.
+
 ## Uninstalling
 
 Uninstalling the extension via the Extensions panel removes the VS Code side. The `pre-push` hook snippet is cleaned up automatically when the extension deactivates. If you want to manually remove it, open `.git/hooks/pre-push` in your repository and delete the lines between `# push-reminder-vscode-managed` and `# push-reminder-vscode-managed-end`.
