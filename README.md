@@ -36,7 +36,7 @@ git clone <repo-url>
 cd push-reminder-extension
 npm install
 npm run compile
-npm run package   # produces push-reminder-0.0.1.vsix
+npx @vscode/vsce package  # produces push-reminder-0.0.1.vsix
 ```
 
 Then install the generated `.vsix` as described above.
