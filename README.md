@@ -13,7 +13,7 @@ When the extension activates, it:
 
 The hook is non-destructive — if a `pre-push` hook already exists, the extension appends its snippet rather than replacing the file.
 
-## Requirements
+## Requirement
 
 - VS Code 1.80 or later
 - `curl` available on your `PATH` (used by the git hook)
