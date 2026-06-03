@@ -86,7 +86,7 @@ If you maintain a pre-push checklist in an Obsidian note, the extension can auto
 "pushReminder.obsidianChecklist.filePath": "/absolute/path/to/your/checklist.md"
 ```
 
-- `obsidianChecklist.enabled` — set to `true` to turn this on (default: `false`)
+- `obsidianChecklist.enabled`  set to `true` to turn this on (default: `false`)
 - `obsidianChecklist.filePath` — absolute path to the `.md` file containing your checklist
 
 If the file can't be read or contains no checklist items, the extension falls back to the normal dialog and shows a warning notification.
